@@ -36,9 +36,17 @@ class Lista extends ListaModel implements ILista
     }
 
 
-    private function setDados(array $dados)
+    public function setDados(array $dados)
     {
         $this->set($dados);
+    }
+
+    public function apagar(): bool
+    {
+        if (!empty($this->id))
+            return $this->apaga();
+        else
+            return false;
     }
 
     public function verificarTotal(int $totalPermitido): bool

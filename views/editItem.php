@@ -96,7 +96,7 @@ if (!empty($dados['id'])) {
             </div>
             <div class="modal-footer">
                 <a href="/KANBAN/views/index.php" class="btn btn-secondary" data-dismiss="modal">Fechar</a>
-                <button type="submit" class="btn btn-primary">Savar </button>
+                <button type="submit" class="btn btn-primary">Salvar </button>
             </div>
         </form>
     </div>

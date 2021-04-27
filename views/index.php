@@ -9,6 +9,7 @@ $tamanhoColuna = 100;
 if (count($listas) !== 0)
     $tamanhoColuna = 100 / count($listas);
 
+
 ?>
 
 <!DOCTYPE html>
@@ -66,10 +67,13 @@ if (count($listas) !== 0)
                         inserir lista
                     </button>
 
-                    <button class="btn btn-success mr-2 btn-sm my-sm-0" type="button" data-toggle="modal" data-target="#modalItem">
-                        inserir item
-                    </button>
+                    <?php if (!empty($listas)) : ?>
 
+                        <button class="btn btn-success mr-2 btn-sm my-sm-0" type="button" data-toggle="modal" data-target="#modalItem">
+                            inserir item
+                        </button>
+
+                    <?php endif ?>
                 </div>
             </form>
         </div>
@@ -81,9 +85,28 @@ if (count($listas) !== 0)
 
 
                 <div class="lista" style="width: <?= $tamanhoColuna ?>%;">
-                    <p class="my-2 font-weight-bold">
-                        <?= $lista['title'] ?>
-                    </p>
+                    <div class="d-flex">
+                        <div>
+                            <p class="my-2 font-weight-bold">
+                                <?= $lista['title'] ?>
+                            </p>
+                        </div>
+
+                        <?php if (empty($lista['itens'])) : ?>
+
+                            <div class="justify-content-end">
+
+
+                                <form class="my-2 mx-1 my-lg-0" method="GET" action="../views/deleteList.php">
+                                    <input type="text" name="idList" class="d-none" value="<?= $lista['id'] ?>">
+                                    <button class="float-right btn">
+                                        <span>&times;</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                        <?php endif ?>
+                    </div>
 
                     <?php if (!empty($lista['itens'])) : ?>
 
@@ -172,7 +195,7 @@ if (count($listas) !== 0)
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-primary">Savar </button>
+                                <button type="submit" class="btn btn-primary">Salvar </button>
                             </div>
                         </form>
                     </div>

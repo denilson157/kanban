@@ -32,6 +32,7 @@ class Item extends ItemModel implements IITem
             return [];
 
         $retorno = $this->get();
+
         return $retorno[0];
     }
 
@@ -59,7 +60,6 @@ class Item extends ItemModel implements IITem
             $this->set($item);
             $this->listaId = $listas[0]['id'];
             return $this->salva();
-            
         } else
             return false;
     }
