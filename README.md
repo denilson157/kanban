@@ -4,7 +4,7 @@
 Tendo um servidor PHP e SQLServer rodando localmente, basta baixar o arquivo ZIP do projeto e inicia-lo em:
 views/index
 
-#Execute a query no seu banco 
+##Execute a query no seu banco 
 (mysql)
 
 CREATE TABLE `lista` (
@@ -25,7 +25,7 @@ CREATE TABLE `item` (
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`listaId`) REFERENCES `lista` (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 26 DEFAULT CHARSET = utf8mb4
 
-#Não esqueca de trocar seu banco de dados no arquivo de configuração.
+##Não esqueca de trocar seu banco de dados no arquivo de configuração.
 
 
 ## Licensas
