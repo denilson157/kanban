@@ -54,13 +54,21 @@ class Item extends ItemModel implements IITem
         if (!empty($this->id)) {
             $item = $this->getItem();
 
-            $lista = new ListaModel();
-            $listas = $lista->last('LIMIT 1', 'DESC');
+            $listas = $this->retornarUltimaListaCadastrada();
 
             $this->set($item);
             $this->listaId = $listas[0]['id'];
+            
             return $this->salva();
         } else
             return false;
+    }
+
+    private function retornarUltimaListaCadastrada(): array
+    {
+        $lista = new ListaModel();
+        $listas = $lista->last('LIMIT 1', 'DESC');
+
+        return $listas;
     }
 }
