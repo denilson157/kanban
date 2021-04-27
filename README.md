@@ -26,7 +26,3 @@ CREATE TABLE `item` (
 ) ENGINE = InnoDB AUTO_INCREMENT = 26 DEFAULT CHARSET = utf8mb4
 
 ## Não esqueca de trocar seu banco de dados no arquivo de configuração.
-
-
-## Licensas
-[The Movie Database](https://www.themoviedb.org/)
