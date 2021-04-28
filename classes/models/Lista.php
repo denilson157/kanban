@@ -45,7 +45,7 @@ class ListaModel extends Database
     protected function apaga(): bool
     {
         $stmt = $this->prepare('DELETE FROM lista WHERE id = :id');
-        var_dump($this->id);
+
         if ($stmt->execute([':id' => $this->id]))
             return true;
         else
