@@ -33,6 +33,9 @@ class Item extends ItemModel implements IITem
 
         $retorno = $this->get();
 
+        if (empty($retorno))
+            return [];
+
         return $retorno[0];
     }
 
@@ -54,11 +57,14 @@ class Item extends ItemModel implements IITem
         if (!empty($this->id)) {
             $item = $this->getItem();
 
+            if (empty($item))
+                return false;
+
             $listas = $this->retornarUltimaListaCadastrada();
 
             $this->set($item);
             $this->listaId = $listas[0]['id'];
-            
+
             return $this->salva();
         } else
             return false;

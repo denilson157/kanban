@@ -14,6 +14,10 @@ $itemLista = new Item();
 if (!empty($dados['id'])) {
     $itemLista->setDados(['id' => $dados['id']]);
     $itemEdit = $itemLista->getItem();
+
+    if (empty($itemEdit)) {
+        Header("Location: /KANBAN/views/index.php");
+    }
 }
 
 ?>
