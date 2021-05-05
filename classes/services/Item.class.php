@@ -60,7 +60,9 @@ class Item extends ItemModel implements IITem
             if (empty($item))
                 return false;
 
-            $listas = $this->retornarUltimaListaCadastrada();
+            $lista = new Lista();
+
+            $listas = $lista->retornarUltimaListaCadastrada();
 
             $this->set($item);
             $this->listaId = $listas[0]['id'];
@@ -68,13 +70,5 @@ class Item extends ItemModel implements IITem
             return $this->salva();
         } else
             return false;
-    }
-
-    private function retornarUltimaListaCadastrada(): array
-    {
-        $lista = new ListaModel();
-        $listas = $lista->last('LIMIT 1', 'DESC');
-
-        return $listas;
     }
 }

@@ -30,7 +30,7 @@ class Lista extends ListaModel implements ILista
             $itemLista->set(['listaId' => $item['id']]);
             $lista[$key]['itens'] = $itemLista->getByList();
         }
-        
+
 
         return $lista;
     }
@@ -57,5 +57,12 @@ class Lista extends ListaModel implements ILista
             return true;
         else
             return false;
+    }
+
+    public function retornarUltimaListaCadastrada(): array
+    {        
+        $ultimaLista = $this->last('LIMIT 1', 'DESC');
+
+        return $ultimaLista;
     }
 }
