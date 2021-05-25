@@ -1,9 +1,9 @@
 <?php
 
-require_once(__DIR__ . '/../abstratas/Database.class.php');
+require_once(__DIR__ . '/../abstratas/RepositoryDatabase.class.php');
 
 
-class ItemModel extends Database
+class ItemModel extends RepositoryDatabase
 {
     protected $id;
     protected $titulo;
@@ -13,7 +13,7 @@ class ItemModel extends Database
 
     protected function atualiza(): bool
     {
-        $stmt = $this->prepare('UPDATE item 
+        $this->stmt = $this->prepare('UPDATE item 
         SET 
         titulo = :titulo, 
         subtitulo = :subtitulo,
@@ -22,66 +22,60 @@ class ItemModel extends Database
         WHERE
             id = :id');
 
-        if ($stmt->execute(
-            [
-                ':id' => $this->id,
-                ':titulo' => $this->titulo,
-                ':subtitulo' => $this->subtitulo,
-                ':descricao' => $this->descricao,
-                ':listaId' => $this->listaId,
-            ]
-        ))
-            return true;
-        else
-            return false;
+        $this->arrayExecucao = [
+            ':id' => $this->id,
+            ':titulo' => $this->titulo,
+            ':subtitulo' => $this->subtitulo,
+            ':descricao' => $this->descricao,
+            ':listaId' => $this->listaId,
+        ];
+
+        return parent::executarSql();
     }
 
     protected function insere(): bool
     {
 
-        $stmt = $this->prepare('INSERT INTO item 
+        $this->stmt = $this->prepare('INSERT INTO item 
         (titulo, subtitulo, descricao, listaId) 
         VALUES 
         (:titulo, :subtitulo, :descricao, :listaId)');
 
-        if ($stmt->execute([
+
+        $this->arrayExecucao = [
             ':titulo' => $this->titulo,
             ':subtitulo' => $this->subtitulo,
             ':descricao' => $this->descricao,
             ':listaId' => $this->listaId,
-        ]))
-            return true;
-        else
-            return false;
+        ];
+
+        return parent::executarSql();
     }
 
     protected function apaga(): bool
     {
-        $stmt = $this->prepare('DELETE FROM item WHERE id = :id');
+        $this->stmt = $this->prepare('DELETE FROM item WHERE id = :id');
 
-        if ($stmt->execute([':id' => $this->id]))
-            return true;
-        else
-            return false;
+        $this->arrayExecucao = [':id' => $this->id];
+
+        return parent::executarSql();
     }
 
     public function get(): array
     {
-        $stmt = $this->prepare('SELECT * from item WHERE id = :id');
-        if ($stmt->execute([':id' => $this->id]))
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        else
-            return [];
+        $this->stmt = $this->prepare('SELECT * from item WHERE id = :id');
+        $this->arrayExecucao = [':id' => $this->id];
+
+        return parent::buscarSql();
     }
 
     public function getByList(): array
     {
-        $stmt = $this->prepare('SELECT * from item WHERE listaId = :listaId');
+        $this->stmt = $this->prepare('SELECT * from item WHERE listaId = :listaId');
 
-        if ($stmt->execute([':listaId' => $this->listaId]))
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        else
-            return [];
+        $this->arrayExecucao = [':listaId' => $this->listaId];
+
+        return parent::buscarSql();
     }
 
     public function set(array $dados)
