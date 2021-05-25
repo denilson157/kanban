@@ -8,7 +8,7 @@ abstract class RepositoryDatabase extends Database
     protected $stmt;
     protected $arrayExecucao;
 
-    protected function executarSql(): bool
+    public function executarSql(): bool
     {
         if ($this->stmt->execute($this->arrayExecucao))
             return true;
@@ -16,7 +16,7 @@ abstract class RepositoryDatabase extends Database
             return false;
     }
 
-    protected function buscarSql()
+    public function buscarSql(): array
     {
         if ($this->stmt->execute($this->arrayExecucao))
             return $this->stmt->fetchAll(PDO::FETCH_ASSOC);

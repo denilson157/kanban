@@ -8,6 +8,16 @@ class ListaModel extends RepositoryDatabase
     protected $id;
     protected $title;
 
+    public function executarSql(): bool
+    {
+        return parent::executarSql();
+    }
+
+    public function buscarSql(): array
+    {
+        return parent::buscarSql();
+    }
+
     protected function atualiza(): bool
     {
         $this->stmt = $this->prepare('UPDATE lista 
@@ -21,7 +31,7 @@ class ListaModel extends RepositoryDatabase
             ':title' => $this->title
         ];
 
-        return parent::executarSql();
+        return $this->executarSql();
     }
 
     protected function insere(): bool
@@ -35,7 +45,7 @@ class ListaModel extends RepositoryDatabase
             ':title' => $this->title
         ];
 
-        return parent::executarSql();
+        return $this->executarSql();
     }
 
     protected function apaga(): bool
@@ -44,7 +54,7 @@ class ListaModel extends RepositoryDatabase
 
         $this->arrayExecucao = [':id' => $this->id];
 
-        return parent::executarSql();
+        return $this->executarSql();
     }
 
     protected function set(array $dados)
@@ -58,7 +68,7 @@ class ListaModel extends RepositoryDatabase
         $this->stmt = $this->prepare('SELECT * from lista');
         $this->arrayExecucao = [];
 
-        return parent::buscarSql();
+        return $this->buscarSql();
     }
 
     public function last(): array
@@ -66,6 +76,6 @@ class ListaModel extends RepositoryDatabase
         $this->stmt = $this->prepare('SELECT * from lista ORDER BY id DESC LIMIT 1');
         $this->arrayExecucao = [];
 
-        return parent::buscarSql();
+        return $this->buscarSql();
     }
 }

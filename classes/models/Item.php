@@ -11,6 +11,17 @@ class ItemModel extends RepositoryDatabase
     protected $descricao;
     protected $listaId;
 
+    public function executarSql(): bool
+    {
+        return parent::executarSql();
+    }
+
+    public function buscarSql(): array
+    {
+        return parent::buscarSql();
+    }
+
+
     protected function atualiza(): bool
     {
         $this->stmt = $this->prepare('UPDATE item 
@@ -30,7 +41,7 @@ class ItemModel extends RepositoryDatabase
             ':listaId' => $this->listaId,
         ];
 
-        return parent::executarSql();
+        return $this->executarSql();
     }
 
     protected function insere(): bool
@@ -49,7 +60,7 @@ class ItemModel extends RepositoryDatabase
             ':listaId' => $this->listaId,
         ];
 
-        return parent::executarSql();
+        return $this->executarSql();
     }
 
     protected function apaga(): bool
@@ -58,7 +69,7 @@ class ItemModel extends RepositoryDatabase
 
         $this->arrayExecucao = [':id' => $this->id];
 
-        return parent::executarSql();
+        return $this->executarSql();
     }
 
     public function get(): array
@@ -66,7 +77,7 @@ class ItemModel extends RepositoryDatabase
         $this->stmt = $this->prepare('SELECT * from item WHERE id = :id');
         $this->arrayExecucao = [':id' => $this->id];
 
-        return parent::buscarSql();
+        return $this->buscarSql();
     }
 
     public function getByList(): array
@@ -75,7 +86,7 @@ class ItemModel extends RepositoryDatabase
 
         $this->arrayExecucao = [':listaId' => $this->listaId];
 
-        return parent::buscarSql();
+        return $this->buscarSql();
     }
 
     public function set(array $dados)
